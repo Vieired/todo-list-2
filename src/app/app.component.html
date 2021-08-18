@@ -1,14 +1,36 @@
 <h1>Lista de Tarefas</h1>
 
 <section>
-  <ul *ngIf="todoList$ | async as items; else loading">
-    <li *ngFor="let item of items">
-      <span *ngIf="item.done">&#x02713;</span>
-      {{ item.title }}
-      <button (click)="removeTodo(item.id)">Remover</button>
-      <button (click)="markAsDone(item)" *ngIf="!item.done">Concluir</button>
-    </li>
-  </ul>
+
+  <table mat-table [dataSource]="dataSource"
+    class="table mat-elevation-z8"
+    *ngIf="todoList$ | async as items; else loading">
+
+    <ng-container matColumnDef="title">
+      <th mat-header-cell *matHeaderCellDef> Descrição </th>
+      <td mat-cell *matCellDef="let element"> {{element.title}} </td>
+    </ng-container>
+  
+    <ng-container matColumnDef="done">
+      <th mat-header-cell *matHeaderCellDef> Concluído </th>
+      <td mat-cell *matCellDef="let element">
+        {{element.done?"&#x02713;":""}}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef> Ações </th>
+      <td mat-cell *matCellDef="let element">
+        <button (click)="removeTodo(element.id)">Remover</button>
+        <button (click)="markAsDone(element)"
+          *ngIf="!element.done">Concluir</button>
+      </td>
+    </ng-container>
+  
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
   <ng-template #loading>
     <p>Carregando...</p>
   </ng-template>  

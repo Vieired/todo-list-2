@@ -14,6 +14,8 @@ export class AppComponent implements OnInit {
   public todos: Todo[] = [];
   todoList: Todo[];
   todoList$: Observable<Todo[]>;
+  displayedColumns: string[] = ['title', 'done', 'actions'];
+  dataSource: Todo[];
 
   constructor(
     private fb: FormBuilder,
@@ -40,6 +42,10 @@ export class AppComponent implements OnInit {
 
   load() {
     this.todoList$ = this.service.list();
+    this.service.list()
+      .subscribe(data => {
+        this.dataSource = data;
+      });
   }
 
   addTodo() {
