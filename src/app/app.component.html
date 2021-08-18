@@ -36,9 +36,20 @@
   </ng-template>  
 </section>
 
-<section>
+<!-- <section>
   <form [formGroup]="form">
     <input type="text" formControlName="title" placeholder="Título">
     <button (click)="addTodo()">Adicionar</button>
+  </form>
+</section> -->
+
+<section>
+  <form [formGroup]="form">
+    <mat-form-field class="example-full-width">
+      <input matInput placeholder="Título" 
+      formControlName="title" autocomplete="off">
+    </mat-form-field>
+    <button type="button" mat-raised-button color="primary" 
+      (click)="addTodo()">Adicionar</button>
   </form>
 </section>
