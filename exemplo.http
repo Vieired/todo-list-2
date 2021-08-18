@@ -1,0 +1,30 @@
+http://localhost:3000/todoList
+
+###
+
+GET http://localhost:3000/todoList/3 HTTP/1.1
+
+###
+
+POST http://localhost:3000/todoList HTTP/1.1
+content-type: application/json
+
+{
+    "title": "Comprar fechadura da porta",
+    "done": false
+}
+
+###
+
+PUT http://localhost:3000/todoList/1 HTTP/1.1
+content-type: application/json
+
+{
+    "title": "Passear com o cachorro e o papagaio"
+}
+
+###
+
+DELETE http://localhost:3000/todoList/2
+
+
